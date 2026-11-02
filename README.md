@@ -146,7 +146,7 @@ Make sure the Function App is configured with:
 - **Runtime**: Python 3.9+
 - **Functions runtime version**: ~4
 - **App setting** `AzureWebJobsStorage` pointing to a real Azure Storage account
-- **Authentication**: The app uses `AuthLevel.SYSTEM`, meaning requests must include the **system key** in the `x-functions-key` header (or `code` query parameter). System keys are managed under *Function App → App keys* in the Azure portal and are intended for extension-to-extension communication — not for end users or function-level callers.
+- **Authentication**: The app uses `AuthLevel.FUNCTION`, meaning requests must include the **system key** in the `x-functions-key` header (or `code` query parameter). System keys are managed under *Function App → App keys* in the Azure portal and are intended for extension-to-extension communication — not for end users or function-level callers.
 
 ## Available summarization algorithms
 

@@ -12,15 +12,19 @@ app = func.FunctionApp()
     arg_name="text",
     description="Text to summarize"
 )
-def summarizer_mcp(text: str) -> str:
+@app.mcp_tool_property(
+    arg_name="sentence_count",
+    description="Number of sentences to put into summary. Default: 6.",
+    is_required=False
+)
+def summarizer_mcp(text: str, sentence_count: int = 6) -> str:
     """
     Sample function for text summarization
     """
 
     parser = PlaintextParser.from_string(text, Tokenizer("english"))
-    senteces = LsaSummarizer()(parser.document, 2)
+    sentences = LsaSummarizer()(parser.document, sentence_count)
     
     logging.info("Code review checklist prompt invoked.")
-
-    summary = str()
-    return summary.join(senteces)
+    
+    return str().join([str(setnence) for setnence in sentences])
