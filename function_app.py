@@ -3,6 +3,7 @@ import logging
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lsa import LsaSummarizer
+from langdetect import detect
 
 app = func.FunctionApp()
 
@@ -22,7 +23,7 @@ def summarizer_mcp(text: str, sentence_count: int = 6) -> str:
     Sample function for text summarization
     """
 
-    parser = PlaintextParser.from_string(text, Tokenizer("english"))
+    parser = PlaintextParser.from_string(text, Tokenizer(detect(text)))
     sentences = LsaSummarizer()(parser.document, sentence_count)
     
     logging.info("Code review checklist prompt invoked.")
